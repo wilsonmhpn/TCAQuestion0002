@@ -50,7 +50,7 @@ struct SheetScene: ReducerProtocol {
         switch action {
 
             case .begin:
-                // Sufficiently fast updates on this results in parent receiving a child action when child state was "nil" via this send..
+                // Sufficiently fast updates on this results in parent receiving a child action when child state was "nil" via this send, when this scene is dismissed...
                 return .run { send in
                     for await result in await ThingWithManyResults.asyncStream(name: "Sheet Scene", timeInterval: 0.1) {
                         await send(.latestOfManyAsyncResults(result))
